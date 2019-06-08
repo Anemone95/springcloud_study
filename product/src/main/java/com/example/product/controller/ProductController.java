@@ -1,5 +1,6 @@
 package com.example.product.controller;
 
+import com.example.product.dto.CartDTO;
 import com.example.product.VO.ProductInfoVO;
 import com.example.product.VO.ProductVO;
 import com.example.product.VO.ResultVO;
@@ -10,11 +11,8 @@ import com.example.product.service.ProductService;
 import com.example.product.utils.ResultVOUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,5 +60,21 @@ public class ProductController {
             productVOList.add(productVO);
         }
         return ResultVOUtil.success(productVOList);
+    }
+
+    /**
+     * 获取商品列表，给订单服务用
+     * @param productIdList
+     * @return
+     */
+    @PostMapping("/listForOrder")
+    public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList) {
+        return productService.findList(productIdList);
+    }
+
+    @PostMapping("/decreaseStock")
+    public String decreaseStock(@RequestBody List<CartDTO> cartDTOList) {
+        productService.decreaseStock(cartDTOList);
+        return "success";
     }
 }

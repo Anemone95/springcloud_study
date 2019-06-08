@@ -38,6 +38,7 @@ public class OrderController {
     @PostMapping
     public ResultVO create(@Valid OrderForm orderForm,
                            BindingResult bindingResult){
+
         if (bindingResult.hasErrors()) {
             log.error("[Create Order] Invaild argument, orderFrom={}", orderForm);
             throw new OrderException(ResultEnum.PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());

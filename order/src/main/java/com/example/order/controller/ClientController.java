@@ -1,6 +1,8 @@
 package com.example.order.controller;
 
 import com.example.order.client.ProductClient;
+import com.example.order.dataobject.ProductInfo;
+import com.example.order.dto.CartDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -8,6 +10,9 @@ import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -53,6 +58,19 @@ public class ClientController {
         RestTemplate restTemplate=new RestTemplate();
         String response=restTemplate.getForObject("http://localhost:8080/msg", String.class);
         log.info("response={}", response);
+        return response;
+    }
+
+    @GetMapping("/getProductList")
+    public String getProductList() {
+        List<ProductInfo> productInfos=productClient.listForOrder(Arrays.asList("157875196366160022", "164103465734242707"));
+        log.info("response={}", productInfos);
+        return "ok";
+    }
+
+    @GetMapping("/decreaseStock")
+    public String productDecreaseStock() {
+        String response = productClient.decreaseStock(Arrays.asList(new CartDTO("164103465734242707",2)));
         return response;
     }
 }

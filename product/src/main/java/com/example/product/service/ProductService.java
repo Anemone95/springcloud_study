@@ -1,7 +1,7 @@
 package com.example.product.service;
 
+import com.example.product.dto.CartDTO;
 import com.example.product.dataobject.ProductInfo;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,4 +11,8 @@ public interface ProductService {
      * @return
      */
     List<ProductInfo> findUpInfoAll();
+
+    List<ProductInfo> findList(List<String> ids);
+
+    void decreaseStock(List<CartDTO> cartDTOList);
 }
