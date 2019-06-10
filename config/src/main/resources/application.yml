@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          # 用系统的sshkey
+          uri: git@github.com:Anemone95/springcloud_study_config_repo.git
+          basedir: D:/Store/document/all_my_work/springcloud_study/config-repository
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
