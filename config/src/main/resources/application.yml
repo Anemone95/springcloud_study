@@ -6,9 +6,23 @@ spring:
       server:
         git:
           # 用系统的sshkey
-          uri: git@github.com:Anemone95/springcloud_study_config_repo.git
-          basedir: D:/Store/document/all_my_work/springcloud_study/config-repository
+          uri: git@github.com:anemone95/springcloud_study_config_repo.git
+          # basedir: d:/store/document/all_my_work/springcloud_study/config-repository
+# rabbitmq配置
+  rabbitmq:
+    host: docker.test
+    username: guest
+    password: guest
+    port: 5672
+
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultzone: http://localhost:8761/eureka
+
+# 暴露接口
+management:
+  endpoints:
+    web:
+      expose: "*"
+
