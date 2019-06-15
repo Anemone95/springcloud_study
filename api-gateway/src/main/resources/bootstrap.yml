@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        # eureka中注册中心的应用名
+        service-id: CONFIG
+      # 对应{name}-{profiles}.yml中的profiles(name通过spring.application.name确定)
+      profile: dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+

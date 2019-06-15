@@ -9,6 +9,28 @@ spring:
         service-id: CONFIG
       # 对应{name}-{profiles}.yml中的profiles(name通过spring.application.name确定)
       profile: dev
+    # 多个实例不重复创建队列(指定消费组)
+    stream:
+      bindings:
+        # key名称
+        myMessage-input:
+          # 绑定到myMessage队列
+          destination: myMessage
+          # 绑定到order组
+          group: order
+          # 消息格式
+          content-type: application/json
+        myMessage-output:
+          destination: myMessage
+          group: order
+          content-type: application/json
+        callback-input:
+          destination: callback
+          # 绑定到order组
+          group: order
+        callback-output:
+          destination: callback
+          group: order
 
 # 如果eureka不是默认url则需要配置
 eureka:

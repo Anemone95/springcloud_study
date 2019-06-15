@@ -8,7 +8,7 @@ spring:
           # 用系统的sshkey
           uri: git@github.com:anemone95/springcloud_study_config_repo.git
           # basedir: d:/store/document/all_my_work/springcloud_study/config-repository
-# rabbitmq配置
+  # rabbitmq配置
   rabbitmq:
     host: docker.test
     username: guest
